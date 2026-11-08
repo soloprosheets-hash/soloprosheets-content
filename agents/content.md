@@ -23,7 +23,7 @@ Only the owner changes this line (to `false`, which queues posts automatically).
 6. Commit the images (`git add images/<date>`, message "Post images <date>") and push. Wait 5 seconds, then check one raw URL returns HTTP 200.
 7. Create the Buffer posts (`schedulingType: automatic`; `saveToDraft: true` if DRAFT_MODE else `mode: addToQueue`):
    - **Instagram**: the 5 slide images (alt text = slide text), `metadata.instagram = {type:"post", shouldShareToFeed:true, isAiGenerated:true}`.
-   - **TikTok**: the same 5 images and caption.
+   - **TikTok**: the 5 images from `images/<date>/tiktok/` and the TikTok caption (store URL as text, no "link in bio").
    - **Pinterest**: `pin.png`, `metadata.pinterest = {title, url:<topic link>, boardServiceId}`. Get boards with `get_channel`; pick the board whose name best matches the pillar. If there are no boards, skip Pinterest, log `skipped: no Pinterest boards`, and create an approval titled "Create Pinterest boards" (only if no pending one exists).
 8. Append one line per channel to `post-log.csv`: `date,channel,topic#,status,buffer_post_id,image_url,error`. Commit and push.
 9. Finish the run record (common.md step 4) and add an `events` doc per post: "Draft ready: <title> (<channel>)" or "Queued: ...".
