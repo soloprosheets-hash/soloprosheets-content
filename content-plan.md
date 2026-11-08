@@ -7,9 +7,9 @@ The weekly analyst may reorder topics and add new ones at the bottom; it never d
 
 | Key | URL | Status |
 |---|---|---|
-| TRACKER | (not listed yet) | waiting for Payhip listing |
-| CALCULATOR | (not listed yet) | waiting for Payhip listing |
-| STORE | (not listed yet) | waiting for Payhip listing |
+| TRACKER | https://payhip.com/b/KgFQ2 | live, €19 |
+| CALCULATOR | https://payhip.com/b/kNL9P | live, free (collects email) |
+| STORE | https://payhip.com/soloprosheets | live |
 
 Rule: if a topic's link is still "(not listed yet)", the agent skips that topic.
 
