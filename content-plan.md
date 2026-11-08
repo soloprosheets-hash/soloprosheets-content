@@ -19,7 +19,7 @@ Rule: if a topic's link is still "(not listed yet)", the agent skips that topic.
 - One useful tip per post. The product is the last line, never the headline.
 - Never promise income, never invent client results or testimonials, never claim to be a lash artist.
 - Pins: title under 100 characters with the keyword near the start; description 2–3 sentences.
-- Carousels: 5 slides. Slide 1 hook, slides 2–4 the tip, slide 5 "Free price calculator / full tracker, link in bio".
+- Carousels: 5–8 slides, structure and layouts per `agents/creative-director.md` (fresh angle every post, quality-checked before Buffer).
 
 ## Pillars
 

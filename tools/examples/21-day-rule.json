@@ -1,0 +1,10 @@
+{"theme":"mint",
+ "pin":{"kicker":"Client retention","title":"The 21-Day Rule: Never Lose a Lash Refill Client","points":["Log every visit with the date","Each week, list clients 21+ days since their last refill","Send a friendly 'want your usual slot?'","Book them before they drift"],"footer":"Lash & Brow Business Tracker"},
+ "slides":[
+  {"layout":"cover","kicker":"Client retention","title":"She didn't leave because of your lashes.","sub":"She left because nobody noticed she was late."},
+  {"layout":"statement","title":"Clients rarely say goodbye. They just *drift*.","sub":"One missed refill turns into a full set somewhere else."},
+  {"layout":"number","number":"21","label":"days: your refill check-in point","note":"Refills are usually every 2–3 weeks. Set the number that matches what you tell clients."},
+  {"layout":"steps","title":"The 21-day rule","items":["Log every visit with the date","Each Monday, list clients 21+ days since their last visit","Send a friendly “want your usual slot?”","Book them before they book elsewhere"]},
+  {"layout":"compare","title":"Memory vs a refill list","left":{"label":"From memory","items":["You notice weeks later","Gaps in your diary","Chasing feels awkward"]},"right":{"label":"Refill list","items":["See who's due on Monday","Fill gaps early","A normal, friendly reminder"]}},
+  {"layout":"cta","title":"See who's due at a glance","sub":"The tracker flags every client past their refill window. You pick the number of days.","action":"See the tracker"}
+ ]}

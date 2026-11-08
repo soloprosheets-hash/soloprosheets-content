@@ -1,0 +1,10 @@
+{"theme":"cream",
+ "pin":{"kicker":"Lash business money","title":"9 Expenses Lash Techs Forget to Track","points":["Booking app & card fees","Insurance and training","Replacing tweezers & lamps","Laundry, disposables, phone tools"],"footer":"Lash & Brow Business Tracker"},
+ "slides":[
+  {"layout":"cover","kicker":"Lash business money","number":"9","title":"costs lash techs forget to count","sub":"How many are missing from your numbers?"},
+  {"layout":"statement","title":"Busy diary, small profit? Look at the *small costs*.","sub":"They never feel like spending. They add up anyway."},
+  {"layout":"checklist","title":"The 3 everyone counts","items":["Lash trays & glue","Pads, tape, primer, remover","Aftercare you give away"]},
+  {"layout":"checklist","title":"The 6 that slip through","items":["Booking app & card fees","Insurance","Training & refresher courses","Replacing tweezers & lamps","Laundry & disposables","Phone & social media apps"]},
+  {"layout":"question","title":"Quick self-check","answer":"How many of the 9 do you write down every month?","note":"Each one you skip makes your profit look bigger than it is."},
+  {"layout":"cta","title":"Track all 9 in one sheet","sub":"The Lash & Brow Business Tracker has an Expenses tab that totals them for you.","action":"See the tracker"}
+ ]}

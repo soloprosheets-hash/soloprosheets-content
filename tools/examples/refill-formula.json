@@ -1,0 +1,11 @@
+{"theme":"teal",
+ "pin":{"kicker":"Lash refills","title":"How Much to Charge for a Lash Refill (3-Part Formula)","points":["Your minutes × your hourly target","+ product cost per refill","+ a share of rent, insurance & apps","= your minimum refill price"],"footer":"Free price calculator"},
+ "slides":[
+  {"layout":"cover","kicker":"Lash refills","title":"Your refill price is probably a *guess*.","sub":"Check it with a 3-part formula. Takes 2 minutes."},
+  {"layout":"question","title":"What does a 50-minute refill really cost you?","answer":"Not just lashes and glue. Your time and your fixed costs are in there too."},
+  {"layout":"mistake","mistake":"Copying the price of the salon down the road.","fix":"Start from your minutes and your costs. Compare after.","why":"Their rent, speed and costs aren't yours."},
+  {"layout":"formula","title":"The refill formula","parts":["Minutes ÷ 60 × your hourly target","Product cost per refill","Share of rent, insurance & apps"],"result":"Your minimum refill price"},
+  {"layout":"example","title":"One refill, worked out","rows":[["50 min at €30/hour","€25.00"],["Lashes, glue, pads","€4.00"],["Share of fixed costs","€6.00"]],"total":["Minimum price","€35.00"],"note":"Swap in your own numbers."},
+  {"layout":"statement","title":"Charging less than that? You're *paying* to work.","sub":"Raise the price, or shorten the service."},
+  {"layout":"cta","title":"Check your refill price","sub":"Free Google Sheets calculator. Type your minutes and costs, it does the maths.","action":"Get the free calculator"}
+ ]}
