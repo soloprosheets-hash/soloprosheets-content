@@ -33,7 +33,7 @@ Only the owner changes this line (to `false`, which queues posts automatically).
 6. **Quality control** — `agents/creative-director.md` §5. Fix warnings, look at `sheet.png`, score, rewrite
    once if needed. If it still fails: do not create Buffer posts; create the "Review carousel" approval,
    log `held` in `post-log.csv` for each channel, and go to step 10.
-7. Commit the images except `sheet.png` (`git add images/<date> ':!images/<date>/sheet.png'`, message
+7. Commit the images except `sheet.png` (`git add images/<date>`; `sheet.png` is git-ignored; message
    "Post images <date>") and push. Wait 5 seconds, then check one raw URL returns HTTP 200.
 8. Create the Buffer posts (`schedulingType: automatic`; `saveToDraft: true` if DRAFT_MODE else
    `mode: addToQueue`), captions per `agents/creative-director.md` §6:
