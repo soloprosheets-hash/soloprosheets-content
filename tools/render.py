@@ -7,7 +7,7 @@ spec.json:
 {
   "pin":    {"kicker": "Lash pricing", "title": "How to Price Lash Extensions So You Get Paid",
              "points": ["...", "...", "..."], "footer": "Free price calculator"},
-  "slides": [{"title": "...", "body": "..."}, ... 5 items ...]
+  "slides": [{"title": "...", "body": "...", "cta": "optional footer text on the last slide"}, ... 5 items ...]
 }
 
 Writes OUT_DIR/pin.png (1000x1500) and OUT_DIR/slide-1.png ... (1080x1350).
@@ -53,7 +53,7 @@ h1{{font-size:{title_size}px;line-height:1.05;letter-spacing:-2px;margin:0;color
 p{{font-size:{46 if first else 54}px;line-height:1.36;margin:0 0 auto;color:{'#CFEFE2' if first else INK};white-space:pre-line}}
 .n{{display:flex;justify-content:space-between;font-size:30px;color:{'#9FD9C2' if first else MUTED}}}</style>
 <div class="page"><div class="brand">{LOGO}SoloPro Sheets</div><span class="bar"></span><h1>{e(s.get('title'))}</h1><p>{e(s.get('body'))}</p>
-<div class="n"><span>{'Swipe →' if i < n else 'Link in bio'}</span><span>{i}/{n}</span></div></div>"""
+<div class="n"><span>{'Swipe →' if i < n else e(s.get('cta') or 'Link in bio')}</span><span>{i}/{n}</span></div></div>"""
 
 
 async def main(spec_path, out_dir):
