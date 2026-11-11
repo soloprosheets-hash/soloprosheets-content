@@ -4,8 +4,9 @@ Agent id: `content`. Workflow name: `Daily posts`. Read `agents/common.md` first
 
 ## Mode
 
-`DRAFT_MODE = true` — posts are saved as Buffer drafts for the owner to approve.
-Only the owner changes this line (to `false`, which queues posts automatically).
+`DRAFT_MODE = false` — posts are added to the Buffer queue automatically (owner's decision, 2026-11-11) and
+publish in each channel's time slots. Only the owner changes this line (`true` = save as drafts for approval).
+The quality check (step 6) is the gate: a carousel that fails it is held for review, never queued.
 
 ## Steps
 

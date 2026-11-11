@@ -29,13 +29,22 @@ Layouts and fields (text fields accept *word* to highlight it):
   question   title, answer, note?
   example    title, rows: [[label, value]], total: [label, value], note?   (note it is an example)
   summary    title, items?: [str]
-  cta        title, sub?, action                   footer adds "Link in bio" (IG) or the store URL (TikTok)
+  cta        title, sub?, action, screen?, badge?  footer adds "Link in bio" (IG) or the store URL (TikTok)
   text       title, body                           plain fallback
+  phone      title, sub?, screen, badge?, note?, example?   phone mockup showing a sheet or dashboard
+  laptop     title, sub?, screen, badge?, note?, example?   laptop mockup (best for dashboards)
+Mockups (studio.py): screen = sheet {app, sub?, tabs?, tab?, cols?, rows:[[a,b]], hi?: idx|[idx], total?: [a,b], chip?}
+  or dashboard {app, kpis:[[label,value]] (max 3), bars?:[[label,number]], hi?: bar idx}.
+  badge = "text" or {text, icon}. Mockup slides show "Illustration · example numbers" unless "example": false
+  (only when the screen has no numbers). cover/pin also accept "screen" (+ cover "badge") for a mockup cover.
+  checklist items may be {"text", "icon", "note"}; icons: see studio.ICONS.
 Optional on any slide: "tone": "dark" | "light" | "cream" | "amber" to override the theme default.
 """
 import asyncio, html, json, pathlib, re, sys
 
 HERE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import studio  # noqa: E402  (device mockups, icons, polish CSS)
 FONTS = HERE / "fonts"
 STORE = "payhip.com/soloprosheets"
 
@@ -51,6 +60,8 @@ TONES = {
     "cream": dict(bg="#FFF6E4", ink="#1E2B28", head="#0E3B3A", muted="#6E6250", hi="#3BB98A", card="#FFFFFF", cardink="#1E2B28", line="#EEDDBA", logo="#0E3B3A", logo1="#F5B83D"),
     "amber": dict(bg="#F5B83D", ink="#0E3B3A", head="#0E3B3A", muted="#5A4511", hi="#FFFFFF", card="#FFF3D6", cardink="#0E3B3A", line="#D99A1F", logo="#0E3B3A", logo1="#FFFFFF"),
 }
+for _k, _v in studio.TONE_EXTRA.items():
+    TONES[_k].update(_v)
 # default tone per layout, per theme (controlled variation: same system, different composition)
 THEMES = {
     "teal":  {"cover": "dark", "statement": "dark", "summary": "dark", "cta": "amber", "_": "light"},
@@ -206,7 +217,9 @@ def body_html(s, i):
         for it in s.get("items", []):
             it = it if isinstance(it, dict) else {"text": it, "ok": True}
             ok = it.get("ok", True)
-            li += f'<li class="{"" if ok else "no"}"><i>{"✓" if ok else "✕"}</i><span>{esc(it.get("text"))}</span></li>'
+            mark = f'<i class="icb">{studio.icon(it["icon"])}</i>' if it.get("icon") else f'<i>{"✓" if ok else "✕"}</i>'
+            note = f'<small>{esc(it["note"])}</small>' if it.get("note") else ""
+            li += f'<li class="{"" if ok else "no"}">{mark}<span>{esc(it.get("text"))}{note}</span></li>'
         return lay, f"<h2>{g('title')}</h2><ul>{li}</ul>"
     if lay == "compare":
         col = lambda c, cls: f'<div class="col {cls}"><h3>{esc(c.get("label"))}</h3><ul>' + "".join(f"<li>{esc(x)}</li>" for x in c.get("items", [])) + "</ul></div>"
@@ -231,6 +244,15 @@ def body_html(s, i):
         out = f'<div class="q">?</div><h2>{g("title")}</h2><div class="ans"><p class="p">{g("answer")}</p></div>'
         if s.get("note"): out += f'<p class="small">{g("note")}</p>'
         return lay, out
+    if lay in ("phone", "laptop"):
+        sc = s.get("screen") or {}
+        dev = studio.phone(sc) if lay == "phone" else studio.laptop(sc)
+        out = (f"<h2>{g('title')}</h2>" if s.get("title") else "")
+        if s.get("sub"): out += f'<p class="sub">{g("sub")}</p>'
+        out += f'<div class="devrow">{dev}{studio.badge(s.get("badge"))}</div>'
+        if s.get("example", True): out += studio.EXAMPLE_TAG
+        if s.get("note"): out += f'<p class="small">{g("note")}</p>'
+        return "mock " + lay + (" tl" if s.get("badge_left") else ""), out
     if lay == "example":
         rows = "".join(f'<div class="row"><span>{esc(a)}</span><span>{esc(b)}</span></div>' for a, b in s.get("rows", []))
         tl = s.get("total") or ["", ""]
@@ -262,20 +284,32 @@ def slide_html(s, i, n, theme, fmt):
     else:
         foot = f'<footer class="final"><span class="go">{"Link in bio ↗" if fmt == "ig" else STORE}</span><span></span></footer>'
     vars_ = ";".join(f"--{k}:{val}" for k, val in v.items())
+    dots = "".join(f'<i class="{"on" if k == i else ""}"></i>' for k in range(1, n + 1))
+    extra, pcls = "", lay
+    if lay in ("cover", "cta") and s.get("screen"):
+        pcls += " withdev"
+        extra = f'<div class="cvdev">{studio.phone(s["screen"], "small")}{studio.badge(s.get("badge"))}</div>'
+    dev = f"--pw:{560 if tall else 500}px;--ph:{640 if tall else 540}px;--lw:{720 if tall else 760}px;--bh:{230 if tall else 190}px"
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>{font_css()}
-:root{{--w:{w}px;--h:{h}px;--pt:{pt}px;--pr:{pr}px;--pb:{pb}px;--pl:{pl}px;--s:1;--h1:{h1}px;--h1s:{h1s}px;{vars_}}}
-{BASE}</style></head><body>
-<div class="page {lay} {tone}"><div class="brand">{logo()}SoloPro Sheets<span class="count">{i}/{n}</span></div>
-<main class="{lay} {tone}">{inner}</main>{foot}</div></body></html>"""
+:root{{--w:{w}px;--h:{h}px;--pt:{pt}px;--pr:{pr}px;--pb:{pb}px;--pl:{pl}px;--s:1;--h1:{h1}px;--h1s:{h1s}px;{dev};{vars_}}}
+{BASE}{studio.CSS}
+.cvdev .dphone{{--pw:{380 if tall else 340}px;--ph:{470 if tall else 400}px}}</style></head><body>
+<div class="page {pcls} {tone}"><div class="brand">{logo()}SoloPro Sheets<span class="count">{dots}</span></div>
+<main class="{lay} {tone}">{inner}</main>{extra}{foot}</div></body></html>"""
 
 
 def pin_html(p, theme):
     pts = "".join(f'<li><b>{k}</b><span>{esc(t)}</span></li>' for k, t in enumerate(p.get("points", [])[:4], 1))
+    if p.get("screen"):
+        pts = "".join(f'<li><b>{k}</b><span>{esc(t)}</span></li>' for k, t in enumerate(p.get("points", [])[:3], 1))
     v = TONES["cream" if theme == "cream" else "light"]
     vars_ = ";".join(f"--{k}:{val}" for k, val in v.items())
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>{font_css()}
 :root{{--w:1000px;--h:1500px;--pt:90px;--pr:80px;--pb:80px;--pl:80px;--s:1;--h1:84px;--h1s:84px;{vars_}}}
-{BASE}
+{BASE}{studio.CSS}
+:root{{--pw:430px;--ph:430px}}
+.pin .devrow{{margin-top:6px}}
+.pin li{{box-shadow:0 12px 30px -12px rgba(14,59,58,.25);border:0!important}}
 .pin main{{justify-content:flex-start;gap:calc(44px*var(--s))}}
 .pin h1{{font-size:calc(88px*var(--s))}}
 .pin ol{{list-style:none;display:flex;flex-direction:column;gap:calc(24px*var(--s))}}
@@ -283,7 +317,7 @@ def pin_html(p, theme):
 .pin li b{{flex:none;width:58px;height:58px;border-radius:50%;background:#F5B83D;color:#0E3B3A;display:grid;place-items:center;font-size:30px}}
 .pin footer strong{{color:#0E3B3A}}</style></head><body>
 <div class="page pin"><div class="brand">{logo()}SoloPro Sheets</div>
-<main class="pin"><span class="kicker">{esc(p.get('kicker'))}</span><h1>{esc(p.get('title'))}</h1><ol>{pts}</ol></main>
+<main class="pin"><span class="kicker">{esc(p.get('kicker'))}</span><h1>{esc(p.get('title'))}</h1><ol>{pts}</ol>{('<div class="devrow">' + studio.phone(p["screen"]) + '</div>') if p.get("screen") else ""}</main>
 <footer><span>{esc(p.get('footer') or 'Free price calculator')}</span><strong>{STORE}</strong></footer></div></body></html>"""
 
 
@@ -293,7 +327,10 @@ FIT_JS = """() => {
   const over = () => m.scrollHeight > m.clientHeight + 1 || m.scrollWidth > m.clientWidth + 1;
   while (over() && s > 0.72) { s = +(s - 0.04).toFixed(2); r.style.setProperty('--s', s); }
   let wide = [...m.querySelectorAll('*')].some(e => e.scrollWidth > e.clientWidth + 2 && getComputedStyle(e).overflow !== 'visible');
-  return {scale: s, overflow: over(), words: (m.innerText.match(/\\S+/g) || []).length};
+  const c = m.cloneNode(true); c.querySelectorAll('.dev,.badge,.extag').forEach(e => e.remove());
+  document.body.appendChild(c); c.style.cssText = 'position:absolute;left:-9999px';
+  const words = (c.innerText.match(/\\S+/g) || []).length; c.remove();
+  return {scale: s, overflow: over(), words};
 }"""
 
 async def show(pg, doc, out):

@@ -16,7 +16,7 @@ Its limits always apply: no new paid tools, no invented facts, numbers, quotes o
 ## 2. Pick a fresh angle and shape
 
 Read the last 7 rows of `creative-log.csv`. Today's post must differ from the previous **2 posts** in angle
-AND from the previous **3** in `theme` and cover style (`type` / `number` / `story`), and must not reuse a hook
+AND from the previous **3** in `theme` and cover style (`type` / `number` / `story` / `mockup` = cover with a `screen`), and must not reuse a hook
 pattern from the last 7.
 
 Angles: `myth-vs-reality` · `mistake-fix` · `formula` · `worked-example` · `checklist-audit` · `story-reveal` ·
@@ -46,13 +46,27 @@ Cover → context (why it matters) → development (the useful part) → payoff 
 ## 4. Art direction (renderer layouts)
 
 Layouts: `cover` `statement` `number` `steps` `checklist` `compare` `mistake` `formula` `question` `example`
-`summary` `cta` (`text` only as a last resort). Rules:
+`summary` `cta` `phone` `laptop` (`text` only as a last resort). Rules:
 - Never two identical layouts in a row; at least **4 different layouts** per carousel.
 - Max 2 "list" layouts (`steps`, `checklist`) per carousel.
 - Rotate `theme` (`teal`, `mint`, `cream`) between posts; it sets which slides are dark/light/amber.
   Only override `tone` on a slide for a clear reason (e.g. a reveal).
 - Lists: 2–6 items, each ≤ 7 words where possible.
 - Word budget per slide: cover ≤ 18, statement ≤ 22, others ≤ 35.
+
+### Studio look (owner's request, 2026-11-11: "more professional, not just images with text")
+
+Every carousel must look like a polished software/brand account, not text on a background:
+- **At least 2 mockup slides**: a `phone` or `laptop` layout, or a `cover` / `cta` with a `screen` (tilted phone).
+  The cover should carry a `screen` (or a big `number`) — never a plain text-only cover.
+- Checklists use icons: items as `{"text", "icon", "note"?}` (icon names: `tools/studio.py` `ICONS`).
+- Give each mockup a `badge` that states the slide's point in ≤ 5 words (e.g. "2 overdue", "+€20 / month logged").
+- Pins: add a `screen` to the pin (shows a phone under 3 points).
+- Screens show only what the tracker/calculator actually covers (tabs: Clients, Appointments, Expenses, Dashboard;
+  calculator: minutes, costs, price). Use placeholder names ("Client A"), never real-looking people.
+  Numbers on screens are example numbers: the renderer labels mockups "Illustration · example numbers"
+  automatically — never set `"example": false` on a screen that shows numbers.
+- Format reference: `tools/examples/studio-mockups.json` (format only; don't copy its copy).
 
 ## 5. Quality control (before anything goes to Buffer)
 
@@ -63,6 +77,7 @@ Layouts: `cover` `statement` `number` `steps` `checklist` `compare` `mistake` `f
    `hook` · `relevance` · `usefulness` · `flow` · `visual` · `readability` · `accuracy` · `originality` · `cta`.
    - accuracy < 3 if any number/claim is not from the product, a labelled example, or a cited source.
    - originality < 3 if angle, hook pattern or cover style repeats the recent posts (see §2).
+   - visual < 3 if the carousel has fewer than 2 mockup slides, a text-only cover, or a badge/phone covering key text.
 4. Any score < 3 → rewrite once and score again. Still < 3 → **do not create Buffer posts**; create an
    approval "Review carousel: <title>" with the failing scores and the reason, log status `held`.
 

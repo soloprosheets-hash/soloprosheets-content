@@ -1,0 +1,231 @@
+{
+    "theme": "teal",
+    "pin": {
+        "kicker": "Lash refills",
+        "title": "Never Lose a Refill Client: The 21-Day Rule",
+        "points": [
+            "Note every client's last visit",
+            "Flag anyone past 21 days",
+            "Message them before they drift"
+        ],
+        "footer": "Lash & Brow Business Tracker",
+        "screen": {
+            "app": "Clients",
+            "tabs": [
+                "Clients",
+                "Appointments",
+                "Expenses"
+            ],
+            "tab": "Clients",
+            "cols": [
+                "Client",
+                "Days since"
+            ],
+            "rows": [
+                [
+                    "Client A",
+                    "12"
+                ],
+                [
+                    "Client B",
+                    "19"
+                ],
+                [
+                    "Client C",
+                    "26"
+                ],
+                [
+                    "Client D",
+                    "31"
+                ]
+            ],
+            "hi": [
+                2,
+                3
+            ],
+            "chip": "2 clients past 21 days"
+        }
+    },
+    "slides": [
+        {
+            "layout": "cover",
+            "kicker": "Lash refills",
+            "title": "The *21-day* rule for refill clients",
+            "sub": "Spot who's drifting before they book elsewhere.",
+            "screen": {
+                "app": "Clients",
+                "tab": "Clients",
+                "cols": [
+                    "Client",
+                    "Days"
+                ],
+                "rows": [
+                    [
+                        "Client A",
+                        "12"
+                    ],
+                    [
+                        "Client B",
+                        "19"
+                    ],
+                    [
+                        "Client C",
+                        "26"
+                    ],
+                    [
+                        "Client D",
+                        "31"
+                    ]
+                ],
+                "hi": [
+                    2,
+                    3
+                ]
+            },
+            "badge": {
+                "text": "2 overdue",
+                "icon": "bell"
+            }
+        },
+        {
+            "layout": "checklist",
+            "title": "What to note every visit",
+            "items": [
+                {
+                    "text": "Date of the visit",
+                    "icon": "calendar",
+                    "note": "So you can count the days"
+                },
+                {
+                    "text": "Service and style",
+                    "icon": "sparkle"
+                },
+                {
+                    "text": "When they should be back",
+                    "icon": "repeat"
+                }
+            ]
+        },
+        {
+            "layout": "phone",
+            "title": "One column does the work",
+            "sub": "Days since the last visit, highlighted past 21.",
+            "screen": {
+                "app": "Clients",
+                "tabs": [
+                    "Clients",
+                    "Appointments",
+                    "Expenses"
+                ],
+                "tab": "Clients",
+                "cols": [
+                    "Client",
+                    "Days"
+                ],
+                "rows": [
+                    [
+                        "Client A",
+                        "12"
+                    ],
+                    [
+                        "Client B",
+                        "19"
+                    ],
+                    [
+                        "Client C",
+                        "26"
+                    ],
+                    [
+                        "Client D",
+                        "31"
+                    ]
+                ],
+                "hi": [
+                    2,
+                    3
+                ]
+            },
+            "badge": {
+                "text": "Past 21 = message today",
+                "icon": "bell"
+            }
+        },
+        {
+            "layout": "laptop",
+            "title": "See it on one dashboard",
+            "screen": {
+                "app": "Dashboard",
+                "kpis": [
+                    [
+                        "Income",
+                        "\u20ac2,140"
+                    ],
+                    [
+                        "Expenses",
+                        "\u20ac610"
+                    ],
+                    [
+                        "Due refills",
+                        "4"
+                    ]
+                ],
+                "bars": [
+                    [
+                        "Jul",
+                        1650
+                    ],
+                    [
+                        "Aug",
+                        1820
+                    ],
+                    [
+                        "Sep",
+                        1700
+                    ],
+                    [
+                        "Oct",
+                        2010
+                    ],
+                    [
+                        "Nov",
+                        2140
+                    ]
+                ],
+                "hi": 4
+            },
+            "badge": {
+                "text": "Refills due: 4",
+                "icon": "repeat"
+            },
+            "badge_left": true
+        },
+        {
+            "layout": "cta",
+            "title": "Never lose a refill client",
+            "sub": "The tracker flags who's due, every week.",
+            "action": "See the tracker",
+            "screen": {
+                "app": "Clients",
+                "tab": "Due for refill",
+                "rows": [
+                    [
+                        "Client C",
+                        "26 days"
+                    ],
+                    [
+                        "Client D",
+                        "31 days"
+                    ]
+                ],
+                "hi": [
+                    0,
+                    1
+                ]
+            },
+            "badge": {
+                "text": "Due this week",
+                "icon": "bell"
+            }
+        }
+    ]
+}
